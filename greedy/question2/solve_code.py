@@ -5,17 +5,14 @@ import pytest
 
 def solution(size_str: str, card_str_list: List[str]) -> int:
     n, m = map(int, size_str.split())
-    card_info_list = []
+    max_card = 0
     
     for i in range(n):
-        card_info = list(map(int, card_str_list[i].split()))
-        card_info_list.append(card_info)
-    
-    max_card = 0
-    for card_list in card_info_list:
-        min_card = min(card_list)
-        if max_card < min_card:
-            max_card = min_card
+        card_info_list = list(map(int, card_str_list[i].split()))
+        for card_list in card_info_list:
+            min_card = min(card_list)
+            if max_card < min_card:
+                max_card = min_card
     
     return max_card
 
