@@ -3,10 +3,9 @@ import pytest
 
 def solution(size: str, ice_box: list[str]) -> int:
     n, m = map(int, size.split())
-    ice_box_grid = []
+    grid_graph = []
     for i in range(n):
-        print(i, ice_box[i])
-        ice_box_grid.append(list(map(int, ice_box[i])))
+        grid_graph.append(list(map(int, ice_box[i])))
     
     def dfs(x: int, y: int) -> bool:
         # 격자 범위를 벗어나면 탐색 종료
@@ -14,9 +13,9 @@ def solution(size: str, ice_box: list[str]) -> int:
             return False
         
         # 방문하지 않은 노드(구멍 뚫린 칸)이면 방문 처리 후 상하좌우 탐색
-        if ice_box_grid[x][y] == 0:
+        if grid_graph[x][y] == 0:
             # 방문 처리
-            ice_box_grid[x][y] = 1
+            grid_graph[x][y] = 1
             
             # 인접 노드 탐색
             dfs(x - 1, y)
@@ -31,7 +30,7 @@ def solution(size: str, ice_box: list[str]) -> int:
         return False
     
     result = 0
-    # 격자 노드의 모든 좌표를 직접 순회하며 dfs 수행
+    # 격자 그래프 노드의 모든 좌표를 직접 순회하며 dfs 수행
     for i in range(n):
         for j in range(m):
             if dfs(i, j) == True:
